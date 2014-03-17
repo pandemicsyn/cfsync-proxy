@@ -1,2 +1,2 @@
 #options to pass cfsync-proxy
-EOPTS='-addr=":8080" -v=true'
+EOPTS="-addr=:8080 -v=true"

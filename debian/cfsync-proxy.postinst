@@ -1,7 +1,0 @@
-#!/bin/sh
-
-set -e
-
-#do shit here
-
-#DEBHELPER#

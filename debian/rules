@@ -16,7 +16,6 @@ override_dh_auto_install:
 		dh_testroot
 		dh_prep
 		dh_installdirs
-		dh_installinit
 		make install DESTDIR=$(CURDIR)/debian/cfsync-proxy PREFIX=/usr
 
 %:

@@ -16,4 +16,4 @@ run:
 		/usr/bin/cfsync-proxy
 
 dpkg:
-		mkdir -p debian
+		dpkg-buildpackage -tc
