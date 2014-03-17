@@ -1,16 +1,19 @@
+DESTDIR =
+PREFIX  = /usr
+BINDIR 	= $(PREFIX)/bin
 
 build:
-	go build -o cfsync-proxy
+		go build -o cfsync-proxy
 
 install:
-	install -t /usr/bin cfsync-proxy
+		install -d $(DESTDIR)$(BINDIR)
+		install cfsync-proxy $(DESTDIR)$(BINDIR)
 
 clean:
-	rm -f /usr/bin/cfsync-proxy
-	rm -f cfsync-proxy
+		rm -f cfsync-proxy
 
 run:
-	/usr/bin/cfsync-proxy
+		/usr/bin/cfsync-proxy
 
 dpkg:
-	mkdir -p debian
+		mkdir -p debian

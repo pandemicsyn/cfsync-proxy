@@ -1,0 +1,24 @@
+#!/usr/bin/make -f
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+#MAKEARGS=DESTDIR=debian/cfsync-proxy PREFIX=/usr IGNOREGIT=true
+
+override_dh_auto_clean:
+		make clean
+
+override_dh_auto_build:
+		make build
+
+override_dh_auto_install:
+		dh_testdir
+		dh_testroot
+		dh_prep
+		dh_installdirs
+		make install DESTDIR=$(CURDIR)/debian/cfsync-proxy PREFIX=/usr
+
+%:
+		dh $@
+
+
