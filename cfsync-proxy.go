@@ -2,10 +2,13 @@ package main
 
 import (
 	"flag"
-	"github.com/elazarl/goproxy"
 	"log"
+	"log/syslog"
 	"net/http"
+	"runtime"
 	"strings"
+
+	"github.com/elazarl/goproxy"
 )
 
 func main() {
@@ -13,7 +16,18 @@ func main() {
 	addr := flag.String("addr", ":8080", "proxy listen address")
 	match := flag.String("match", ".clouddrive.com:443", "Only allow requests destined to this suffix match")
 	flag.Parse()
+
+	syslogger, err := syslog.New(syslog.LOG_CRIT, "cfsync-proxy")
+	if err != nil {
+		log.Fatalln("Unable to setup syslog!")
+	}
+
+	//log.SetOutput(syslogger)
+	logger := log.New(syslogger, "", log.LstdFlags)
+	log.SetOutput(syslogger)
+	runtime.GOMAXPROCS(runtime.NumCPU())
 	proxy := goproxy.NewProxyHttpServer()
+	proxy.Logger = logger
 	proxy.Verbose = *verbose
 	proxy.OnRequest().HandleConnectFunc(func(host string, ctx *goproxy.ProxyCtx) (*goproxy.ConnectAction, string) {
 		if strings.HasSuffix(host, *match) {

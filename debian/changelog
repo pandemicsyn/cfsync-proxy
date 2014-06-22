@@ -1,3 +1,9 @@
+cfsync-proxy (0.0.5) precise; urgency=low
+
+  * Enable syslog and set max procs
+
+ -- Florian Hines <syn@ronin.io>  Sun, 22 Jun 2014 00:10:59 +0000
+
 cfsync-proxy (0.0.4) precise; urgency=low
 
   * upstart
